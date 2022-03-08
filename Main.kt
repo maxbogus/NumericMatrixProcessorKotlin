@@ -28,19 +28,19 @@ fun main() {
 fun matrixMultiplicationByConstant() {
     println("Enter size of matrix:")
     val input = readLine()!!.split(" ").map { it.toInt() }
-    val matrix = mutableListOf<List<Int>>()
+    val matrix = mutableListOf<List<String>>()
     println("Enter matrix:")
     repeat(input[0]) {
-        val line = readLine()!!.split(" ").map { it.toInt() }
+        val line = readLine()!!.split(" ").map { it }
         matrix.add(line)
     }
     println("Enter constant:")
-    val const = readLine()!!.toInt()
+    val const = readLine()!!
     println("The result is:")
     for (line in matrix) {
-        val result = mutableListOf<Int>()
+        val result = mutableListOf<Double>()
         for (int in line) {
-            result.add(int * const)
+            result.add(int.toDouble() * const.toDouble())
         }
         println(result.joinToString(" "))
     }
@@ -49,18 +49,18 @@ fun matrixMultiplicationByConstant() {
 private fun matrixAddition() {
     println("Enter size of first matrix:")
     val firstMatrixParams = readLine()!!.split(" ").map { it.toInt() }
-    val firstMatrix = mutableListOf<List<Int>>()
+    val firstMatrix = mutableListOf<List<String>>()
     println("Enter first matrix:")
     repeat(firstMatrixParams[0]) {
-        val line = readLine()!!.split(" ").map { it.toInt() }
+        val line = readLine()!!.split(" ").map { it }
         firstMatrix.add(line)
     }
     println("Enter size of second matrix:")
     val secondMatrixParams = readLine()!!.split(" ").map { it.toInt() }
-    val secondMatrix = mutableListOf<List<Int>>()
+    val secondMatrix = mutableListOf<List<String>>()
     println("Enter second matrix:")
     repeat(secondMatrixParams[0]) {
-        val line = readLine()!!.split(" ").map { it.toInt() }
+        val line = readLine()!!.split(" ").map { it }
         secondMatrix.add(line)
     }
 
@@ -68,11 +68,11 @@ private fun matrixAddition() {
         println("ERROR")
     } else {
         println("The result is:")
-        val result = mutableListOf<MutableList<Int>>()
+        val result = mutableListOf<MutableList<Double>>()
         for (x in 0 until firstMatrixParams[0]) {
-            val line = mutableListOf<Int>()
+            val line = mutableListOf<Double>()
             for (y in 0 until firstMatrixParams[1]) {
-                line.add(firstMatrix[x][y] + secondMatrix[x][y])
+                line.add(firstMatrix[x][y].toDouble() + secondMatrix[x][y].toDouble())
             }
             result.add(line)
         }
