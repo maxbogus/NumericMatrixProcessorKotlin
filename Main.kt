@@ -18,22 +18,22 @@ fun main() {
             "2" -> {
                 matrixMultiplicationByConstant()
             }
-            "3" -> {}
+            "3" -> {
+                matrixByMatrixMultiplication()
+            }
             else -> {}
         }
 
     } while (input != "0")
 }
 
+fun matrixByMatrixMultiplication() {
+    TODO("Not yet implemented")
+}
+
 fun matrixMultiplicationByConstant() {
-    println("Enter size of matrix:")
-    val input = readLine()!!.split(" ").map { it.toInt() }
-    val matrix = mutableListOf<List<String>>()
-    println("Enter matrix:")
-    repeat(input[0]) {
-        val line = readLine()!!.split(" ").map { it }
-        matrix.add(line)
-    }
+    val input = parseMatrixParams("")
+    val matrix = parseMatrix(input)
     println("Enter constant:")
     val const = readLine()!!
     println("The result is:")
@@ -47,22 +47,10 @@ fun matrixMultiplicationByConstant() {
 }
 
 private fun matrixAddition() {
-    println("Enter size of first matrix:")
-    val firstMatrixParams = readLine()!!.split(" ").map { it.toInt() }
-    val firstMatrix = mutableListOf<List<String>>()
-    println("Enter first matrix:")
-    repeat(firstMatrixParams[0]) {
-        val line = readLine()!!.split(" ").map { it }
-        firstMatrix.add(line)
-    }
-    println("Enter size of second matrix:")
-    val secondMatrixParams = readLine()!!.split(" ").map { it.toInt() }
-    val secondMatrix = mutableListOf<List<String>>()
-    println("Enter second matrix:")
-    repeat(secondMatrixParams[0]) {
-        val line = readLine()!!.split(" ").map { it }
-        secondMatrix.add(line)
-    }
+    val firstMatrixParams = parseMatrixParams("first ")
+    val firstMatrix = parseMatrix(firstMatrixParams, "first ")
+    val secondMatrixParams = parseMatrixParams("second ")
+    val secondMatrix = parseMatrix(firstMatrixParams, "second ")
 
     if (firstMatrixParams != secondMatrixParams) {
         println("ERROR")
@@ -80,4 +68,19 @@ private fun matrixAddition() {
             println(line.joinToString(" "))
         }
     }
+}
+
+private fun parseMatrixParams(name: String = " "): List<Int> {
+    println("Enter size of ${name}matrix:")
+    return readLine()!!.split(" ").map { it.toInt() }
+}
+
+private fun parseMatrix(matrixParams: List<Int>, name: String = " "): MutableList<List<String>> {
+    val matrix = mutableListOf<List<String>>()
+    println("Enter ${name}matrix:")
+    repeat(matrixParams[0]) {
+        val line = readLine()!!.split(" ").map { it }
+        matrix.add(line)
+    }
+    return matrix
 }
