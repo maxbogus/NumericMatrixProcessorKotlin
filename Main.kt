@@ -1,8 +1,24 @@
 package processor
 
 fun main() {
-    matrixMultiplicationByConstant()
-//    matrixAddition()
+    do {
+        println(
+            """
+            1. Add matrices
+            2. Multiply matrix by a constant
+            3. Multiply matrices
+            0. Exit
+        """.trimIndent()
+        )
+        val input = readLine()!!
+        when (input) {
+            "1" -> matrixAddition()
+            "2" -> matrixMultiplicationByConstant()
+            "3" -> {}
+            else -> {}
+        }
+
+    } while (input != "0")
 }
 
 fun matrixMultiplicationByConstant() {
