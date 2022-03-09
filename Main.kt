@@ -1,5 +1,7 @@
 package processor
 
+import kotlin.math.abs
+
 fun main() {
     do {
         println(
@@ -103,36 +105,39 @@ private fun transposeMatrix(
 ): MutableList<MutableList<Double>> {
     val result = generatePrefilledMatrix(matrixParams[0], matrixParams[1])
 
+    val rowLimit = matrixParams[0]
+    val columnLimit = matrixParams[1]
+
     when (type) {
         "1" -> {
-            for (row in 0 until matrixParams[0]) {
-                for (line in 0 until matrixParams[1]) {
+            for (row in 0 until rowLimit) {
+                for (line in 0 until columnLimit) {
                     val value = matrix[row][line]
                     result[line][row] = value
                 }
             }
         }
         "2" -> {
-            for (row in 0 until matrixParams[0]) {
-                for (line in 0 until matrixParams[1]) {
-                    val value = matrix[row][line]
-                    result[line][row] = value
+            for (row in 0 until   rowLimit) {
+                for (column in 0 until   columnLimit) {
+                    val value = matrix[row][column]
+                    result[abs(columnLimit - column) - 1][abs(rowLimit - row) - 1] = value
                 }
             }
         }
         "3" -> {
-            for (row in 0 until matrixParams[0]) {
-                for (line in 0 until matrixParams[1]) {
-                    val value = matrix[row][line]
-                    result[line][row] = value
+            for (row in 0 until   rowLimit) {
+                for (column in 0 until   columnLimit) {
+                    val value = matrix[row][column]
+                    result[row][abs(columnLimit - column) - 1] = value
                 }
             }
         }
         else -> {
-            for (row in 0 until matrixParams[0]) {
-                for (line in 0 until matrixParams[1]) {
-                    val value = matrix[row][line]
-                    result[line][row] = value
+            for (row in 0 until   rowLimit) {
+                for (column in 0 until   columnLimit) {
+                    val value = matrix[row][column]
+                    result[abs(rowLimit - row) - 1][column] = value
                 }
             }
         }
