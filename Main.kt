@@ -33,13 +33,13 @@ fun matrixByMatrixMultiplication() {
     val firstMatrixParams = parseMatrixParams("first ")
     val firstMatrix = parseMatrix(firstMatrixParams, "first ")
     val secondMatrixParams = parseMatrixParams("second ")
-    if (firstMatrixParams.size == 1 || secondMatrixParams.size == 1) {
+    if (firstMatrixParams[1] != secondMatrixParams[0]) {
         println("The operation cannot be performed.")
     } else {
         val secondMatrix = parseMatrix(secondMatrixParams, "second ")
 
-        val rows = max(firstMatrixParams[0], secondMatrixParams[0])
-        val columns = max(firstMatrixParams[1], secondMatrixParams[1])
+        val rows = firstMatrixParams[0]
+        val columns = secondMatrixParams[1]
 
         val result = generatePrefilledMatrix(
             rows,
