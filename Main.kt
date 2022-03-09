@@ -1,7 +1,5 @@
 package processor
 
-import java.lang.Math.max
-
 fun main() {
     do {
         println(
@@ -9,6 +7,7 @@ fun main() {
             1. Add matrices
             2. Multiply matrix by a constant
             3. Multiply matrices
+            4. Transpose matrix
             0. Exit
         """.trimIndent()
         )
@@ -23,10 +22,27 @@ fun main() {
             "3" -> {
                 matrixByMatrixMultiplication()
             }
+            "4" -> {
+                performTransposeMatrix()
+            }
             else -> {}
         }
 
     } while (input != "0")
+}
+
+fun performTransposeMatrix() {
+    println(
+        """
+        1. Main diagonal
+        2. Side diagonal
+        3. Vertical line
+        4. Horizontal line
+    """.trimIndent()
+    )
+    val transposeType = readLine()!!
+
+
 }
 
 fun matrixByMatrixMultiplication() {
@@ -54,9 +70,7 @@ fun matrixByMatrixMultiplication() {
             }
         }
 
-        for (line in result) {
-            println(line.joinToString(" "))
-        }
+        printMatrix(result)
     }
 }
 
@@ -68,12 +82,12 @@ fun multiplyAndSumList(firstMatrixValue: List<Double>, secondMatrixValue: List<D
     return result
 }
 
-fun getFirstMatrixValue(list: List<List<Double>>, rowIndex: Int): List<Double> {
+fun <Value> getFirstMatrixValue(list: List<List<Value>>, rowIndex: Int): List<Value> {
     return list[rowIndex]
 }
 
-fun getSecondMatrixValue(list: List<List<Double>>, columnIndex: Int): List<Double> {
-    val result = mutableListOf<Double>()
+fun <Value> getSecondMatrixValue(list: List<List<Value>>, columnIndex: Int): List<Value> {
+    val result = mutableListOf<Value>()
     for (line in list) {
         result.add(line[columnIndex])
     }
@@ -118,7 +132,7 @@ fun matrixMultiplicationByConstant() {
     for (line in matrix) {
         val result = mutableListOf<Double>()
         for (int in line) {
-            result.add(int.toDouble() * const.toDouble())
+            result.add(int * const.toDouble())
         }
         println(result.joinToString(" "))
     }
@@ -142,9 +156,13 @@ private fun matrixAddition() {
             }
             result.add(line)
         }
-        for (line in result) {
-            println(line.joinToString(" "))
-        }
+        printMatrix(result)
+    }
+}
+
+private fun <Element> printMatrix(result: List<List<Element>>) {
+    for (line in result) {
+        println(line.joinToString(" "))
     }
 }
 
