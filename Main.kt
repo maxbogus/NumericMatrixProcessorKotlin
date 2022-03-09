@@ -41,8 +41,10 @@ fun performTransposeMatrix() {
     """.trimIndent()
     )
     val transposeType = readLine()!!
-
-
+    val matrixParams = parseMatrixParams()
+    val matrix = parseMatrix(matrixParams)
+    val result = transposeMatrix(matrixParams, matrix, transposeType)
+    printMatrix(result)
 }
 
 fun matrixByMatrixMultiplication() {
@@ -95,16 +97,48 @@ fun <Value> getSecondMatrixValue(list: List<List<Value>>, columnIndex: Int): Lis
 }
 
 private fun transposeMatrix(
-    secondMatrixParams: List<Int>,
-    secondMatrix: MutableList<List<Double>>,
-    transformedMatrix: MutableList<MutableList<Double>>
-) {
-    for (row in 0 until secondMatrixParams[0]) {
-        for (line in 0 until secondMatrixParams[1]) {
-            val value = secondMatrix[row][line]
-            transformedMatrix[line][row] = value
+    matrixParams: List<Int>,
+    matrix: MutableList<List<Double>>,
+    type: String
+): MutableList<MutableList<Double>> {
+    val result = generatePrefilledMatrix(matrixParams[0], matrixParams[1])
+
+    when (type) {
+        "1" -> {
+            for (row in 0 until matrixParams[0]) {
+                for (line in 0 until matrixParams[1]) {
+                    val value = matrix[row][line]
+                    result[line][row] = value
+                }
+            }
+        }
+        "2" -> {
+            for (row in 0 until matrixParams[0]) {
+                for (line in 0 until matrixParams[1]) {
+                    val value = matrix[row][line]
+                    result[line][row] = value
+                }
+            }
+        }
+        "3" -> {
+            for (row in 0 until matrixParams[0]) {
+                for (line in 0 until matrixParams[1]) {
+                    val value = matrix[row][line]
+                    result[line][row] = value
+                }
+            }
+        }
+        else -> {
+            for (row in 0 until matrixParams[0]) {
+                for (line in 0 until matrixParams[1]) {
+                    val value = matrix[row][line]
+                    result[line][row] = value
+                }
+            }
         }
     }
+
+    return result
 }
 
 private fun generatePrefilledMatrix(
@@ -152,7 +186,7 @@ private fun matrixAddition() {
         for (x in 0 until firstMatrixParams[0]) {
             val line = mutableListOf<Double>()
             for (y in 0 until firstMatrixParams[1]) {
-                line.add(firstMatrix[x][y].toDouble() + secondMatrix[x][y].toDouble())
+                line.add(firstMatrix[x][y] + secondMatrix[x][y])
             }
             result.add(line)
         }
