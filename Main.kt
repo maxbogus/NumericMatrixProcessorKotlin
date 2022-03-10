@@ -10,6 +10,7 @@ fun main() {
             2. Multiply matrix by a constant
             3. Multiply matrices
             4. Transpose matrix
+            5. Calculate a determinant
             0. Exit
         """.trimIndent()
         )
@@ -27,10 +28,19 @@ fun main() {
             "4" -> {
                 performTransposeMatrix()
             }
+            "5" -> {
+                performCalculationOfDeterminant()
+            }
             else -> {}
         }
 
     } while (input != "0")
+}
+
+fun performCalculationOfDeterminant() {
+    val matrixParams = parseMatrixParams()
+    val matrix = parseMatrix(matrixParams)
+    println("The result is:")
 }
 
 fun performTransposeMatrix() {
