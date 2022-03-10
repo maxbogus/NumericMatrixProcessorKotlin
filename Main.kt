@@ -41,6 +41,40 @@ fun performCalculationOfDeterminant() {
     val matrixParams = parseMatrixParams()
     val matrix = parseMatrix(matrixParams)
     println("The result is:")
+    println(
+        when (matrixParams) {
+            listOf(1, 1) -> matrix[0][0]
+            else -> {
+                findDeterminant(matrix)
+            }
+        }
+    )
+}
+
+fun findDeterminant(matrix: MutableList<List<Double>>): Double {
+    if (matrix.size == 2) {
+        return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1]
+    }
+    var result = 0.0
+    for (index in 0 until matrix.size) {
+        val modifiedMatrix = mutableListOf<List<Double>>()
+        var firstLine = true
+        for (line in matrix) {
+            if (!firstLine) {
+                val modifiedLine = mutableListOf<Double>()
+                for (lineIndex in line.indices) {
+                    if (index != lineIndex) {
+                        modifiedLine.add(line[lineIndex])
+                    }
+                }
+                modifiedMatrix.add(modifiedLine)
+            } else {
+                firstLine = false
+            }
+        }
+        result += (if ((index + 1) % 2 == 0) -1 else 1) * matrix[0][index] * findDeterminant(modifiedMatrix)
+    }
+    return result
 }
 
 fun performTransposeMatrix() {
@@ -128,24 +162,24 @@ private fun transposeMatrix(
             }
         }
         "2" -> {
-            for (row in 0 until   rowLimit) {
-                for (column in 0 until   columnLimit) {
+            for (row in 0 until rowLimit) {
+                for (column in 0 until columnLimit) {
                     val value = matrix[row][column]
                     result[abs(columnLimit - column) - 1][abs(rowLimit - row) - 1] = value
                 }
             }
         }
         "3" -> {
-            for (row in 0 until   rowLimit) {
-                for (column in 0 until   columnLimit) {
+            for (row in 0 until rowLimit) {
+                for (column in 0 until columnLimit) {
                     val value = matrix[row][column]
                     result[row][abs(columnLimit - column) - 1] = value
                 }
             }
         }
         else -> {
-            for (row in 0 until   rowLimit) {
-                for (column in 0 until   columnLimit) {
+            for (row in 0 until rowLimit) {
+                for (column in 0 until columnLimit) {
                     val value = matrix[row][column]
                     result[abs(rowLimit - row) - 1][column] = value
                 }
